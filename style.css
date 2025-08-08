@@ -1,0 +1,29 @@
+/* style.css */
+body {
+    font-family: 'Inter', sans-serif;
+}
+#weather-display, #error-message, #loader {
+    transition: opacity 0.5s ease-in-out;
+}
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+.page {
+    display: none;
+}
+.page.active {
+    display: block;
+}
+.message {
+    text-align: center;
+    margin-top: 1rem;
+    font-weight: 500;
+    min-height: 1.5rem;
+}
+.error-message {
+    color: #ef4444; /* red-500 */
+}
+.success-message {
+    color: #22c55e; /* green-500 */
+}

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App with Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 flex items-center justify-center min-h-screen">
+
+    <div class="w-full max-w-md mx-auto p-4">
+
+        <!-- Login Page -->
+        <div id="login-page" class="page active bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg">
+            <h2 class="text-3xl font-bold text-center text-gray-800 dark:text-white mb-6">Login</h2>
+            <form id="login-form">
+                <div class="mb-4">
+                    <label for="login-email" class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2">Email</label>
+                    <input type="email" id="login-email" class="shadow-sm appearance-none border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 rounded-lg w-full py-3 px-4 text-gray-800 dark:text-gray-200 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                </div>
+                <div class="mb-6">
+                    <label for="login-password" class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2">Password</label>
+                    <input type="password" id="login-password" class="shadow-sm appearance-none border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 rounded-lg w-full py-3 px-4 text-gray-800 dark:text-gray-200 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                </div>
+                <button type="submit" id="login-button" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg focus:outline-none focus:shadow-outline transition-colors">
+                    Sign In
+                </button>
+            </form>
+            <p id="login-error" class="message error-message"></p>
+            <p class="text-center text-gray-600 dark:text-gray-400 text-sm mt-6">
+                Don't have an account? <a href="#" id="show-signup" class="font-bold text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-500">Sign Up</a>
+            </p>
+        </div>
+
+        <!-- Signup Page -->
+        <div id="signup-page" class="page bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg">
+            <h2 class="text-3xl font-bold text-center text-gray-800 dark:text-white mb-6">Create Account</h2>
+            <form id="signup-form">
+                <div class="mb-4">
+                    <label for="signup-email" class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2">Email</label>
+                    <input type="email" id="signup-email" class="shadow-sm appearance-none border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 rounded-lg w-full py-3 px-4 text-gray-800 dark:text-gray-200 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                </div>
+                <div class="mb-6">
+                    <label for="signup-password" class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2">Password</label>
+                    <input type="password" id="signup-password" class="shadow-sm appearance-none border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 rounded-lg w-full py-3 px-4 text-gray-800 dark:text-gray-200 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                </div>
+                <button type="submit" id="signup-button" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg focus:outline-none focus:shadow-outline transition-colors">
+                    Sign Up
+                </button>
+            </form>
+            <p id="signup-message" class="message"></p>
+            <p class="text-center text-gray-600 dark:text-gray-400 text-sm mt-6">
+                Already have an account? <a href="#" id="show-login" class="font-bold text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-500">Login</a>
+            </p>
+        </div>
+
+        <!-- Weather App Page -->
+        <div id="weather-app-page" class="page">
+             <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 sm:p-8">
+                <div class="flex justify-between items-center mb-6">
+                    <h1 class="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-white">Weather Forecast</h1>
+                    <button id="logout-button" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors">
+                        Logout
+                    </button>
+                </div>
+                <p class="mb-4 text-gray-600 dark:text-gray-400">Welcome, <span id="user-email" class="font-semibold"></span></p>
+                <div class="flex flex-col sm:flex-row gap-3 mb-6">
+                    <input type="text" id="location-input" placeholder="Enter a city..." class="flex-grow w-full px-4 py-3 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <button id="search-button" class="w-full sm:w-auto px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors">
+                        Search
+                    </button>
+                </div>
+                <div class="flex items-center justify-center my-4">
+                    <span class="h-px bg-gray-300 dark:bg-gray-600 flex-grow"></span>
+                    <span class="mx-4 text-sm text-gray-500 dark:text-gray-400">or</span>
+                    <span class="h-px bg-gray-300 dark:bg-gray-600 flex-grow"></span>
+                </div>
+                <button id="geolocation-button" class="w-full px-6 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 transition-colors mb-6">
+                    Use My Location
+                </button>
+                <div id="loader" class="text-center py-8 hidden">
+                    <svg class="animate-spin h-8 w-8 text-blue-500 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    <p class="mt-2 text-gray-500 dark:text-gray-400">Fetching weather...</p>
+                </div>
+                <div id="error-message" class="relative text-red-500 font-medium p-4 pr-12 bg-red-100 dark:bg-red-900 dark:text-red-300 rounded-lg hidden mb-4">
+                    <span id="error-text"></span>
+                    <button id="dismiss-error-button" aria-label="Dismiss error" class="absolute top-1/2 right-3 -translate-y-1/2 text-red-600 dark:text-red-200 hover:bg-red-200 dark:hover:bg-red-800 rounded-full p-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+                <div id="weather-display" class="hidden opacity-0">
+                    <div class="text-center">
+                        <h2 id="city-name" class="text-3xl font-bold text-gray-900 dark:text-white"></h2>
+                        <p id="weather-description" class="text-lg text-gray-600 dark:text-gray-300 capitalize"></p>
+                    </div>
+                    <div class="flex items-center justify-center my-6">
+                        <img id="weather-icon" src="" alt="Weather Icon" class="w-24 h-24">
+                        <p id="temperature" class="text-7xl font-bold text-gray-900 dark:text-white ml-4"></p>
+                    </div>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 text-center">
+                        <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg">
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Feels Like</p>
+                            <p id="feels-like" class="text-lg font-semibold text-gray-800 dark:text-gray-200"></p>
+                        </div>
+                        <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg">
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Humidity</p>
+                            <p id="humidity" class="text-lg font-semibold text-gray-800 dark:text-gray-200"></p>
+                        </div>
+                        <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg col-span-2 sm:col-span-1">
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Wind Speed</p>
+                            <p id="wind-speed" class="text-lg font-semibold text-gray-800 dark:text-gray-200"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="client.js"></script>
+</body>
+</html>
